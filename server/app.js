@@ -6,7 +6,6 @@ require('dotenv').config();
 const dotenv = require("dotenv");
 const { Connect } = require("./config/connect");
 const cors = require("cors");
-const passport = require("passport");
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -49,7 +48,6 @@ Connect();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 
 
