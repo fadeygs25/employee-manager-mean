@@ -16,6 +16,7 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { UserState } from './store/states/user.state';
 import { ProductState } from './store/states/product.state';
+import { TaskAddComponent } from './pages/task-add/task-add.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { ProductState } from './store/states/product.state';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    TaskAddComponent,
 
   ],
   providers: [],

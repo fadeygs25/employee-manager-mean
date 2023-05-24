@@ -9,8 +9,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  fetchProduct(token: string) {
+    return this.http.get(PRODUCT_CREATE_URL);
+  }
+
   fetchProducts(token: string) {
-    return this.http.get(PRODUCTS_FETCH_URL + token);
+    return this.http.get(PRODUCTS_FETCH_URL);
   }
 
   addProduct(token: string, userData: any) {

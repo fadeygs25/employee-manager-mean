@@ -13,7 +13,9 @@ const cookieParser = require('cookie-parser');
 
 //IMPORT ROUTES
 const productRoutes = require('./routes/productRoute');
+const taskRoutes = require('./routes/taskRoute');
 const localRoutes = require('./routes/userRoute');
+const seedRoutes = require('./routes/seedRoute');
 
 // MIDDLEWARE
 app.use(morgan('dev'));
@@ -53,6 +55,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ROUTES MIDDLEWARE
 app.use("/api", productRoutes)
+app.use("/api", taskRoutes)
 app.use("/api", localRoutes)
+app.use("/api", seedRoutes)
 
 module.exports = app;

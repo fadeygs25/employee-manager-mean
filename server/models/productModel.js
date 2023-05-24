@@ -6,16 +6,23 @@ const productSchema = new mongoose.Schema({
 
     name: {
         type: String,
-        trim: true,
         required: [true, 'Please add a product Name'],
-        maxlength: 32
+    },
+
+    price: {
+        type: Number,
+        required: [true, 'Please add a price'],
+    },
+
+    status: {
+        type: String,
+        required: [true, 'Please add a status'],
+        default: "Processing"
     },
 
     size: {
         type: Number,
-        trim: true,
         required: [true, 'Product must have a price'],
-        maxlength: 32
     },
 
 

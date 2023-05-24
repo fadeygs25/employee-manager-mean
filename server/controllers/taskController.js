@@ -1,20 +1,22 @@
-const Product = require("../models/productModel");
+const Task = require("../models/taskModel");
 
 
 
-exports.createProduct = async (req, res, next) => {
+exports.createTask = async (req, res, next) => {
 
     const { name, price, size } = req.body;
 
     try {
-        const product = await Product.create({
+        const task = await Task.create({
             name,
-            price,
-            size,
+            description,
+            projectId,
+            userId,
+            priority,
         });
         res.status(201).json({
             success: true,
-            product
+            task
         })
 
     } catch (error) {
@@ -25,12 +27,12 @@ exports.createProduct = async (req, res, next) => {
 
 }
 
-exports.displayProduct = async (req, res, next) => {
+exports.displayTask = async (req, res, next) => {
 
 
     try {
-        const products = await Product.find();
-        res.json(products)
+        const tasks = await Task.find();
+        res.json(tasks)
 
     } catch (error) {
         console.log(error);
@@ -40,12 +42,12 @@ exports.displayProduct = async (req, res, next) => {
 
 }
 
-exports.countProducts = async (req, res, next) => {
+exports.countTasks = async (req, res, next) => {
 
 
     try {
-        const countProducts = await Product.countDocuments();
-        res.status(200).json({ count: countProducts });
+        const countTasks = await Task.countDocuments();
+        res.status(200).json({ count: countTasks });
 
 
     } catch (error) {
@@ -56,14 +58,14 @@ exports.countProducts = async (req, res, next) => {
 
 }
 
-exports.findProduct = async (req, res, next) => {
+exports.findTask = async (req, res, next) => {
 
     try {
-        const product = await Product.findById(req.params.id);
-        if (product) {
-            res.send(product);
+        const task = await Task.findById(req.params.id);
+        if (task) {
+            res.send(task);
         } else {
-            res.status(404).send({ message: "Product not found!" });
+            res.status(404).send({ message: "task not found!" });
         }
     } catch (error) {
         console.log(error);
@@ -74,14 +76,14 @@ exports.findProduct = async (req, res, next) => {
 }
 
 
-exports.searchProduct = async (req, res, next) => {
+exports.searchTask = async (req, res, next) => {
 
     try {
-        const products = await Product.find({ name: req.params.id });
-        console.log(products);
+        const tasks = await Task.find({ name: req.params.id });
+        console.log(tasks);
         res.status(201).json({
             success: true,
-            products
+            tasks
         })
     } catch (error) {
         console.log(error);
@@ -91,11 +93,11 @@ exports.searchProduct = async (req, res, next) => {
 
 }
 
-// Update product image in Cloudinary and product data in MongoDB.
-exports.updateProduct = async (req, res, next) => {
+// Update task image in Cloudinary and task data in MongoDB.
+exports.updateTask = async (req, res, next) => {
     try {
-        //current product
-        const currentProduct = await Product.findById(req.params.id);
+        //current task
+        const currentTask = await Task.findById(req.params.id);
         const form = req.body.form
         //build the data object
         const data = {
@@ -106,13 +108,13 @@ exports.updateProduct = async (req, res, next) => {
         }
         //modify image conditionnally
         if (req.body.image !== '') {
-            const ImgId = currentProduct.image_id;
+            const ImgId = currenttask.image_id;
             if (ImgId) {
                 await cloudinary.uploader.destroy(ImgId);
             }
 
             const newImage = await cloudinary.uploader.upload(req.body.image, {
-                folder: "products",
+                folder: "tasks",
                 width: 1000,
                 crop: "scale"
             });
@@ -121,11 +123,11 @@ exports.updateProduct = async (req, res, next) => {
             data.image_id = newImage.public_id
         }
 
-        const productUpdate = await Product.findOneAndUpdate(req.params.id, data, { new: true })
+        const taskUpdate = await task.findOneAndUpdate(req.params.id, data, { new: true })
 
         res.status(200).json({
             success: true,
-            productUpdate
+            taskUpdate
         })
 
 
@@ -138,22 +140,17 @@ exports.updateProduct = async (req, res, next) => {
 
 
 
-// delete product and product image in cloudinary
-exports.deleteProduct = async (req, res, next) => {
+// delete task and task image in cloudinary
+exports.deleteTask = async (req, res, next) => {
 
     try {
-        const product = await Product.findById(req.params.id);
+        const task = await task.findById(req.params.id);
         //retrieve current image ID
-        const imgId = product.image_id;
-        if (imgId) {
-            await cloudinary.uploader.destroy(imgId);
-        }
-
-        const rmProduct = await Product.findByIdAndDelete(req.params.id);
+        const rmTask = await task.findByIdAndDelete(req.params.id);
 
         res.status(201).json({
             success: true,
-            message: " Product deleted",
+            message: " task deleted",
 
         })
 
@@ -170,10 +167,10 @@ exports.deleteProduct = async (req, res, next) => {
 
 
 // display category
-exports.productCategory = async (req, res, next) => {
+exports.taskCategory = async (req, res, next) => {
 
     try {
-        const cat = await Product.find().populate('category', 'name').distinct('category');
+        const cat = await Task.find().populate('category', 'name').distinct('category');
         res.status(201).json({
             success: true,
             cat

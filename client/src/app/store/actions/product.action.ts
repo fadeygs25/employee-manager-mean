@@ -1,5 +1,6 @@
 export class GetProduct {
     static readonly type = '[Products] Fetch Product Data';
+    constructor(public payload: any) { }
 
 }
 

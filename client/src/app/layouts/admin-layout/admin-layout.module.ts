@@ -13,7 +13,6 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { ToastrModule } from 'ngx-toastr';
-import { HomeComponent } from '../../pages/home/home.component';
 import { ProductsComponent } from '../../pages/products/products.component';
 import { ProductListComponent } from '../../pages-admin/product-list/product-list.component';
 import { ProductAddComponent } from '../../pages-admin/product-add/product-add.component';
@@ -36,7 +35,6 @@ import { UserAddComponent } from 'src/app/pages-admin/user-add/user-add.componen
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    HomeComponent,
     ProductsComponent,
     ProductListComponent,
     ProductAddComponent,

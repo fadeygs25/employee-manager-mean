@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
 import { ProductService } from "src/app/services/product.service";
-import { AddProduct, GetProducts } from "../actions/product.action";
+import { AddProduct, GetProducts, GetProduct } from "../actions/product.action";
 
 export class ProductStateModel {
     product: any;
@@ -34,6 +34,17 @@ export class ProductState {
     @Selector()
     static selectProducts(state: ProductStateModel) {
         return state.products;
+    }
+
+    @Action(GetProduct)
+    getProduct(con: StateContext<ProductStateModel>, { payload }) {
+        return this.productService.fetchProduct(payload).pipe(tap(returnData => {
+            const state = con.getState();
+            con.setState({
+                ...state,
+                product: returnData
+            })
+        }))
     }
 
     @Action(GetProducts)
