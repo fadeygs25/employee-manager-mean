@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { USER_LOGIN_URL, USERS_FETCH_URL, USER_REGISTER_URL, USER_FETCH_URL } from '../shared/constants/urls';
+import {
+  USER_LOGIN_URL, USERS_FETCH_URL,
+  USER_REGISTER_URL, USER_FETCH_URL,
+  USER_BY_ID_URL
+} from '../shared/constants/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +19,10 @@ export class UserService {
 
   fetchUsers(token: string) {
     return this.http.get(USERS_FETCH_URL + token);
+  }
+
+  fetchUserById(userId: string) {
+    return this.http.get(USER_BY_ID_URL + userId);
   }
 
   addUser(userData: any) {
@@ -35,4 +43,5 @@ export class UserService {
   updateUser(payload: any, id: number) {
     return this.http.put('http://localhost:5000/' + id, payload);
   }
+
 }

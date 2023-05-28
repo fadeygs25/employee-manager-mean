@@ -13,15 +13,20 @@ export const USER_FETCH_URL = BASE_URL + '/api/userReqToken/';
 export const USERS_FETCH_URL = BASE_URL + '/api/users/all/';
 export const USER_LOGIN_URL = BASE_URL + '/api/signin';
 export const USER_REGISTER_URL = BASE_URL + '/api/signup';
+export const USER_BY_ID_URL = BASE_URL + '/api/user/';
+
 
 export const PRODUCTS_URL = BASE_URL + '/api/product';
 export const PRODUCTS_FETCH_URL = PRODUCTS_URL + '/all';
 export const PRODUCT_CREATE_URL = PRODUCTS_URL + '/create/';
+export const PRODUCT_BY_ID_URL = PRODUCTS_URL + '/find/';
+
 
 export const TASKS_URL = BASE_URL + '/api/task';
 export const TASKS_FETCH_URL = TASKS_URL + '/all';
 export const TASK_CREATE_URL = TASKS_URL + '/create/';
 export const TASK_BY_ID_URL = TASKS_URL + '/find/';
+export const TASK_BY_PRODUCT_URL = TASKS_URL + '/byProduct/';
 
 
 export const ORDERS_URL = BASE_URL + '/api/orders';

@@ -27,7 +27,7 @@ export class UserAddComponent {
   ngOnInit(): void {
     this.userForm = this.fb.group({
       username: [''],
-      fullname: [''],
+      fullName: [''],
       email: [''],
       number: [''],
       address: [''],

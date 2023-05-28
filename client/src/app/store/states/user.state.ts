@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
-import { AddUser, DeleteUser, GetUser, GetUsers, UpdateUser, LoginUser, LogOut } from "../actions/user.action";
+import { AddUser, DeleteUser, GetUser, GetUsers, GetUserById, UpdateUser, LoginUser, LogOut } from "../actions/user.action";
 import { UserService } from "src/app/services/user.service";
 import { CookieService } from 'ngx-cookie-service';
 
 export class UserStateModel {
     user: any;
     users: any;
+    usersById: any;
 }
 
 @State<UserStateModel>({
@@ -16,6 +17,7 @@ export class UserStateModel {
     defaults: {
         user: [],
         users: [],
+        usersById: [],
     }
 })
 
@@ -34,6 +36,11 @@ export class UserState {
 
     @Selector()
     static selectUsers(state: UserStateModel) {
+        return state.usersById;
+    }
+
+    @Selector()
+    static selectUsersById(state: UserStateModel) {
         return state.users;
     }
 
@@ -55,9 +62,19 @@ export class UserState {
             const state = con.getState();
             con.setState({
                 ...state,
-                users: returnData
+                usersById: returnData
             })
-            console.log(returnData)
+        }))
+    }
+
+    @Action(GetUserById)
+    getUserById(con: StateContext<UserStateModel>, { payload }: GetUserById) {
+        return this.ur.fetchUserById(payload).pipe(tap(returnData => {
+            const state = con.getState();
+            con.setState({
+                ...state,
+                user: returnData
+            })
         }))
     }
 

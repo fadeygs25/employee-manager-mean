@@ -16,7 +16,7 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { UserState } from './store/states/user.state';
 import { ProductState } from './store/states/product.state';
-import { TaskAddComponent } from './pages/task-add/task-add.component';
+import { TaskState } from './store/states/task.state';
 
 @NgModule({
   imports: [
@@ -27,7 +27,9 @@ import { TaskAddComponent } from './pages/task-add/task-add.component';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    NgxsModule.forRoot([UserState, ProductState], {
+    NgxsModule.forRoot([UserState, ProductState,
+      TaskState
+    ], {
       developmentMode: !environment.production
     })
   ],
@@ -35,7 +37,6 @@ import { TaskAddComponent } from './pages/task-add/task-add.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    TaskAddComponent,
 
   ],
   providers: [],

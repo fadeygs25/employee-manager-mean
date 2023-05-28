@@ -4,17 +4,25 @@ import { Select, Store } from '@ngxs/store';
 import { GetProduct } from 'src/app/store/actions/product.action';
 import { ProductState } from 'src/app/store/states/product.state';
 import { Observable } from "rxjs";
-
+import { GetTaskByProduct } from 'src/app/store/actions/task.action';
+import { TaskState } from 'src/app/store/states/task.state';
+import { GetUserById } from 'src/app/store/actions/user.action';
+import { UserState } from 'src/app/store/states/user.state';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
   product: [] | any;
+  tasksByProduct: [] | any;
+  usersById: [] | any;
 
   @Select(ProductState.selectProducts) product$: Observable<any> | undefined;
+  @Select(TaskState.selectTasksByProduct) tasksByProduct$: Observable<any> | undefined;
+  @Select(UserState.selectUsersById) usersById$: Observable<any> | undefined;
+
 
   constructor(
     activatedRoute: ActivatedRoute,
@@ -26,10 +34,17 @@ export class ProductDetailComponent {
       this.product$?.subscribe((returnData) => {
         this.product = returnData;
       })
-      // foodService.getFoodById(params.id).subscribe(serverFood => {
-      //   this.food = serverFood;
-      // });
+      this.store.dispatch(new GetTaskByProduct(params.id));
+      this.tasksByProduct$?.subscribe((returnData) => {
+        this.tasksByProduct = returnData;
+      })
     })
   }
 
+  ngOnInit() {
+    this.store.dispatch(new GetUserById(this.tasksByProduct.userId));
+    this.tasksByProduct$?.subscribe((returnData) => {
+      this.tasksByProduct = returnData;
+    })
+  }
 }

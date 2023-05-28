@@ -10,6 +10,8 @@ import { HomeComponent } from '../../pages/home/home.component';
 import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
+import { TaskAddComponent } from 'src/app/pages/task-add/task-add.component';
+import { TaskListsComponent } from 'src/app/pages/task-lists/task-lists.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { ProductDetailComponent } from 'src/app/pages/product-detail/product-det
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    TaskAddComponent,
+    TaskListsComponent
   ]
 })
 export class AuthLayoutModule { }

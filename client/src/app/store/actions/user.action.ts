@@ -8,6 +8,11 @@ export class GetUsers {
 
 }
 
+export class GetUserById {
+    static readonly type = '[User] Fetch User Data By Id';
+    constructor(public payload: any) { }
+}
+
 export class AddUser {
     static readonly type = '[User] Add';
     constructor(public payload: any) { }

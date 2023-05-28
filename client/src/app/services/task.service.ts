@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TASK_CREATE_URL, TASKS_FETCH_URL } from '../shared/constants/urls';
+import {
+  TASK_CREATE_URL, TASKS_FETCH_URL,
+  TASK_BY_PRODUCT_URL
+} from '../shared/constants/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +14,11 @@ export class TaskService {
 
   fetchTask(token: string) {
     return this.http.get(TASK_CREATE_URL);
+  }
+
+
+  fetchTaskByProduct(projectId: string) {
+    return this.http.get(TASK_BY_PRODUCT_URL + projectId);
   }
 
   fetchTasks(token: string) {

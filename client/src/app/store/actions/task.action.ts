@@ -9,6 +9,11 @@ export class GetTasks {
 
 }
 
+export class GetTaskByProduct {
+    static readonly type = '[Tasks] Fetch Tasks Data';
+    constructor(public payload: any) { }
+}
+
 export class AddTask {
     static readonly type = '[Task] Add';
     constructor(public payload: any) { }

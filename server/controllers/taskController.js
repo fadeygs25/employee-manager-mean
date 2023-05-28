@@ -4,8 +4,14 @@ const Task = require("../models/taskModel");
 
 exports.createTask = async (req, res, next) => {
 
-    const { name, price, size } = req.body;
-
+    const {
+        name,
+        description,
+        projectId,
+        priority,
+        status
+    } = req.body;
+    const userId = req.user._id
     try {
         const task = await Task.create({
             name,
@@ -13,6 +19,7 @@ exports.createTask = async (req, res, next) => {
             projectId,
             userId,
             priority,
+            status
         });
         res.status(201).json({
             success: true,
@@ -75,6 +82,19 @@ exports.findTask = async (req, res, next) => {
 
 }
 
+exports.taskByProduct = async (req, res, next) => {
+
+    try {
+        const task = await Task.find({ projectId: req.params.id });
+        res.json(task)
+
+    } catch (error) {
+        console.log(error);
+        next(error);
+
+    }
+
+}
 
 exports.searchTask = async (req, res, next) => {
 

@@ -3,11 +3,12 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
 import { TaskService } from "src/app/services/task.service";
-import { AddTask, GetTasks, GetTask } from "../actions/task.action";
+import { AddTask, GetTasks, GetTask, GetTaskByProduct } from "../actions/task.action";
 
 export class TaskStateModel {
     task: any;
     tasks: any;
+    tasksByProduct: any;
 }
 
 @State<TaskStateModel>({
@@ -16,6 +17,7 @@ export class TaskStateModel {
     defaults: {
         task: [],
         tasks: [],
+        tasksByProduct: [],
     }
 })
 
@@ -36,6 +38,11 @@ export class TaskState {
         return state.tasks;
     }
 
+    @Selector()
+    static selectTasksByProduct(state: TaskStateModel) {
+        return state.tasksByProduct;
+    }
+
     @Action(GetTask)
     getTask(con: StateContext<TaskStateModel>, { payload }) {
         return this.TaskService.fetchTask(payload).pipe(tap(returnData => {
@@ -43,6 +50,17 @@ export class TaskState {
             con.setState({
                 ...state,
                 task: returnData
+            })
+        }))
+    }
+
+    @Action(GetTaskByProduct)
+    getTaskByProduct(con: StateContext<TaskStateModel>, { payload }) {
+        return this.TaskService.fetchTaskByProduct(payload).pipe(tap(returnData => {
+            const state = con.getState();
+            con.setState({
+                ...state,
+                tasksByProduct: returnData
             })
         }))
     }
