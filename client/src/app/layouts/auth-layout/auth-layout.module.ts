@@ -12,6 +12,7 @@ import { RegisterComponent } from '../../pages/register/register.component';
 import { ProductDetailComponent } from 'src/app/pages/product-detail/product-detail.component';
 import { TaskAddComponent } from 'src/app/pages/task-add/task-add.component';
 import { TaskListsComponent } from 'src/app/pages/task-lists/task-lists.component';
+import { TaskEditComponent } from 'src/app/pages/task-edit/task-edit.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { TaskListsComponent } from 'src/app/pages/task-lists/task-lists.componen
     RegisterComponent,
     ProductDetailComponent,
     TaskAddComponent,
+    TaskListsComponent,
     TaskListsComponent
   ]
 })

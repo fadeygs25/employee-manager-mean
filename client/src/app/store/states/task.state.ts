@@ -3,12 +3,13 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
 import { TaskService } from "src/app/services/task.service";
-import { AddTask, GetTasks, GetTask, GetTaskByProduct } from "../actions/task.action";
+import { AddTask, GetTasks, GetTask, GetTaskByProduct, GetTaskById } from "../actions/task.action";
 
 export class TaskStateModel {
     task: any;
     tasks: any;
     tasksByProduct: any;
+    taskById: any;
 }
 
 @State<TaskStateModel>({
@@ -18,6 +19,7 @@ export class TaskStateModel {
         task: [],
         tasks: [],
         tasksByProduct: [],
+        taskById: [],
     }
 })
 
@@ -43,6 +45,12 @@ export class TaskState {
         return state.tasksByProduct;
     }
 
+
+    @Selector()
+    static selectTaskById(state: TaskStateModel) {
+        return state.taskById;
+    }
+
     @Action(GetTask)
     getTask(con: StateContext<TaskStateModel>, { payload }) {
         return this.TaskService.fetchTask(payload).pipe(tap(returnData => {
@@ -61,6 +69,17 @@ export class TaskState {
             con.setState({
                 ...state,
                 tasksByProduct: returnData
+            })
+        }))
+    }
+
+    @Action(GetTaskById)
+    getTaskById(con: StateContext<TaskStateModel>, { payload }) {
+        return this.TaskService.fetchTaskById(payload).pipe(tap(returnData => {
+            const state = con.getState();
+            con.setState({
+                ...state,
+                taskById: returnData
             })
         }))
     }

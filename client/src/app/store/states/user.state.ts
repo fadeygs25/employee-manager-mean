@@ -36,12 +36,12 @@ export class UserState {
 
     @Selector()
     static selectUsers(state: UserStateModel) {
-        return state.usersById;
+        return state.users;
     }
 
     @Selector()
     static selectUsersById(state: UserStateModel) {
-        return state.users;
+        return state.usersById;
     }
 
     @Action(GetUser)
@@ -62,7 +62,7 @@ export class UserState {
             const state = con.getState();
             con.setState({
                 ...state,
-                usersById: returnData
+                users: returnData
             })
         }))
     }
@@ -73,7 +73,7 @@ export class UserState {
             const state = con.getState();
             con.setState({
                 ...state,
-                user: returnData
+                usersById: returnData
             })
         }))
     }
@@ -96,6 +96,7 @@ export class UserState {
     loginUser(con: StateContext<UserStateModel>, { payload }: LoginUser) {
         return this.ur.loginUser(payload).pipe(tap(returnData => {
             this.setCookie(returnData);
+            window.location.reload();
         }))
     }
 

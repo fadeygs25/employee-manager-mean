@@ -69,11 +69,8 @@ exports.findTask = async (req, res, next) => {
 
     try {
         const task = await Task.findById(req.params.id);
-        if (task) {
-            res.send(task);
-        } else {
-            res.status(404).send({ message: "task not found!" });
-        }
+        res.json(task)
+
     } catch (error) {
         console.log(error);
         next(error);

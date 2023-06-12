@@ -37,7 +37,6 @@ import { TaskState } from './store/states/task.state';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

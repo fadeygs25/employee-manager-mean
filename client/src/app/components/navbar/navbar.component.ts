@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isUser() {
-    if (this.user == "") {
+    if (this.user === "") {
       return false;
 
     }

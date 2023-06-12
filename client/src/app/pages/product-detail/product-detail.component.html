@@ -17,7 +17,7 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Card tables</h3>
+          <h3 class="mb-0">Tasks</h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -34,16 +34,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let task of tasksByProduct;index as i">
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                      <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
-                    </a>
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">Dung Vip</span>
-                    </div>
-                  </div>
-                </th>
+                <app-task-lists userId="{{task.userId}}">
+                </app-task-lists>
                 <td>
                   {{task.name}}
                 </td>
@@ -59,7 +51,7 @@
                   {{task.description}}
                 </td>
                 <td>
-                  <a class="dropdown-item" href="javascript:void(0)">Edit</a>
+                  <a routerLink="/task-edit/{{task._id}}" class="dropdown-item">Edit</a>
                 </td>
                 <td>
                   <a class="dropdown-item" href="javascript:void(0)">Delete</a>
