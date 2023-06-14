@@ -11,7 +11,7 @@ router.get('/task/search/:id', searchTask);
 router.get('/task/all', displayTask);
 router.get('/task/countTasks', countTasks);
 router.delete('/task/delete/:id', deleteTask);
-router.put('/tasks/update/:id', isAuthenticated, isAdmin, updateTask);
+router.put('/task/update/:id', updateTask);
 router.get('/task/categories', taskCategory);
 
 

@@ -31,6 +31,7 @@ import { ProjectTaskEditComponent } from 'src/app/components/project-task-edit/p
     TaskAddComponent,
     TaskListsComponent,
     TaskListsComponent,
+    TaskEditComponent,
     ProjectTaskEditComponent
   ]
 })

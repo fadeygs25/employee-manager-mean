@@ -69,6 +69,7 @@ exports.findTask = async (req, res, next) => {
 
     try {
         const task = await Task.findById(req.params.id);
+
         res.json(task)
 
     } catch (error) {
@@ -113,10 +114,10 @@ exports.searchTask = async (req, res, next) => {
 // Update task image in Cloudinary and task data in MongoDB.
 exports.updateTask = async (req, res, next) => {
     try {
-        const { name, description, priority, status } = req.body;
+        const { name, priority, status, description } = req.body;
         const task = await Task.findOneAndUpdate(
             { _id: req.params.id },
-            { name, description, priority, status },
+            { name, priority, status, description },
             { new: true }
         );
         res.json(task);

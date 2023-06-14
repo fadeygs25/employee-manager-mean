@@ -35,7 +35,7 @@ export class TaskService {
   }
 
   updateTask(taskData: any) {
-    return this.http.post(TASK_UPDATE_URL + taskData._id, taskData);
+    return this.http.put(TASK_UPDATE_URL + taskData._id, taskData);
   }
 
   deleteTask(id: string) {

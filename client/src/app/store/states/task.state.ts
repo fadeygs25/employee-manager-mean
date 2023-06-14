@@ -111,12 +111,6 @@ export class TaskState {
     @Action(UpdateTask)
     updateTask(con: StateContext<TaskStateModel>, { payload }: UpdateTask) {
         return this.taskService.updateTask(payload).pipe(tap(returnData => {
-            const state = con.getState();
-            const taskList = [...state.taskById];
-            con.setState({
-                ...state,
-                taskById: taskList
-            })
         }))
     }
 
