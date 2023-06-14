@@ -20,13 +20,16 @@ export const PRODUCTS_URL = BASE_URL + '/api/product';
 export const PRODUCTS_FETCH_URL = PRODUCTS_URL + '/all';
 export const PRODUCT_CREATE_URL = PRODUCTS_URL + '/create/';
 export const PRODUCT_BY_ID_URL = PRODUCTS_URL + '/find/';
+export const PRODUCT_DELETE_URL = PRODUCTS_URL + '/delete/';
 
 
 export const TASKS_URL = BASE_URL + '/api/task';
 export const TASKS_FETCH_URL = TASKS_URL + '/all';
 export const TASK_CREATE_URL = TASKS_URL + '/create/';
+export const TASK_UPDATE_URL = TASKS_URL + '/update/';
 export const TASK_BY_ID_URL = TASKS_URL + '/find/';
 export const TASK_BY_PRODUCT_URL = TASKS_URL + '/byProduct/';
+export const TASK_DELETE_URL = TASKS_URL + '/delete/';
 
 
 export const ORDERS_URL = BASE_URL + '/api/orders';

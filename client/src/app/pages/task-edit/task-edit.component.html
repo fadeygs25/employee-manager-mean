@@ -46,18 +46,7 @@
                         <h6 class="heading-small text-muted mb-4">Information</h6>
                         <div class="pl-lg-4">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-project">Project</label>
-                                        <select formControlName="projectId" class="form-control"
-                                            id="exampleFormControlSelect1">
-                                            <option *ngFor="let product of products;index as i" [value]="product._id">
-                                                {{product.name}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
+                                <div class=" col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-priority">Priority</label>
                                         <select formControlName="priority" class="form-control"
@@ -68,8 +57,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-first-name">Status</label>
@@ -79,7 +66,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <hr class="my-4" />

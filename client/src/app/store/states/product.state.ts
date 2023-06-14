@@ -3,7 +3,8 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
 import { ProductService } from "src/app/services/product.service";
-import { AddProduct, GetProducts, GetProduct } from "../actions/product.action";
+import { AddProduct, GetProducts, GetProduct, DeleteProduct } from "../actions/product.action";
+import { patch, removeItem, updateItem } from '@ngxs/store/operators';
 
 export class ProductStateModel {
     product: any;
@@ -25,6 +26,7 @@ export class ProductState {
         private productService: ProductService,
         private cookieService: CookieService
     ) { }
+
 
     @Selector()
     static selectProduct(state: ProductStateModel) {
@@ -64,6 +66,19 @@ export class ProductState {
             const state = con.getState();
             con.patchState({
                 product: [...state.product, returnData]
+            })
+        }))
+    }
+
+    @Action(DeleteProduct)
+    deleteProduct(con: StateContext<ProductStateModel>, { id }: DeleteProduct) {
+        return this.productService.deleteProduct(id).pipe(tap(() => {
+            const state = con.getState();
+            const filteredArray = state.products.filter((contents: { _id: string; }) => contents._id !== id)
+
+            con.setState({
+                ...state,
+                products: filteredArray
             })
         }))
     }

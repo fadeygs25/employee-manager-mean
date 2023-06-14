@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from "rxjs";
-import { GetTaskByProduct } from 'src/app/store/actions/task.action';
+import { DeleteTask, GetTaskByProduct } from 'src/app/store/actions/task.action';
 import { TaskState } from 'src/app/store/states/task.state';
 import { GetUserById } from 'src/app/store/actions/user.action';
 import { UserState } from 'src/app/store/states/user.state';
@@ -26,7 +26,7 @@ export class ProductDetailComponent implements OnInit {
   ) {
     activatedRoute.params.subscribe((params) => {
       if (params.id)
-      this.store.dispatch(new GetTaskByProduct(params.id));
+        this.store.dispatch(new GetTaskByProduct(params.id));
       this.tasksByProduct$?.subscribe((returnData) => {
         this.tasksByProduct = returnData;
       })
@@ -38,5 +38,9 @@ export class ProductDetailComponent implements OnInit {
     this.tasksByProduct$?.subscribe((returnData) => {
       this.tasksByProduct = returnData;
     })
+  }
+
+  deleteTask(id: string) {
+    this.store.dispatch(new DeleteTask(id));
   }
 }

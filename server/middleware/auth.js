@@ -6,8 +6,6 @@ const ErrorResponse = require('../utils/errorResponse');
 // check if user is authenticated
 exports.isAuthenticated = async (req, res, next) => {
     const token = req.params.id;
-    console.log(token);
-    // make sure token exists
     if (!token) {
         return next(new ErrorResponse('isAuthenticatedReqToken: You must log in to access this ressource', 401));
     }

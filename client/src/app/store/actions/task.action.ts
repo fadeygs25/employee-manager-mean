@@ -36,7 +36,7 @@ export class LoginTask {
 
 export class UpdateTask {
     static readonly type = '[Task] Update';
-    constructor(public payload: any, public id: number, public i: number) { }
+    constructor(public payload: any) { }
 }
 
 export class LogOut {
@@ -46,6 +46,6 @@ export class LogOut {
 export class DeleteTask {
 
     static readonly type = '[Task] Delete';
-    constructor(public id: number) { }
+    constructor(public id: string) { }
 }
 

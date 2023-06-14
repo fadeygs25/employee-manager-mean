@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   TASK_CREATE_URL, TASKS_FETCH_URL,
-  TASK_BY_PRODUCT_URL, TASK_BY_ID_URL
+  TASK_BY_PRODUCT_URL, TASK_BY_ID_URL,
+  TASK_DELETE_URL, TASK_UPDATE_URL
 } from '../shared/constants/urls';
 
 @Injectable({
@@ -31,6 +32,14 @@ export class TaskService {
 
   addTask(token: string, taskData: any) {
     return this.http.post(TASK_CREATE_URL + token, taskData);
+  }
+
+  updateTask(taskData: any) {
+    return this.http.post(TASK_UPDATE_URL + taskData._id, taskData);
+  }
+
+  deleteTask(id: string) {
+    return this.http.delete(TASK_DELETE_URL + id);
   }
 
 }

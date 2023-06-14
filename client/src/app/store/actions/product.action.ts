@@ -34,8 +34,7 @@ export class LogOut {
 }
 
 export class DeleteProduct {
-
     static readonly type = '[Product] Delete';
-    constructor(public id: number) { }
+    constructor(public id: string) { }
 }
 

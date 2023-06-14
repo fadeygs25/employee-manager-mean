@@ -3,7 +3,10 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
 import { TaskService } from "src/app/services/task.service";
-import { AddTask, GetTasks, GetTask, GetTaskByProduct, GetTaskById } from "../actions/task.action";
+import {
+    AddTask, GetTasks, GetTask, GetTaskByProduct, GetTaskById,
+    DeleteTask, UpdateTask
+} from "../actions/task.action";
 
 export class TaskStateModel {
     task: any;
@@ -26,7 +29,7 @@ export class TaskStateModel {
 @Injectable()
 export class TaskState {
     constructor(
-        private TaskService: TaskService,
+        private taskService: TaskService,
         private cookieService: CookieService
     ) { }
 
@@ -53,7 +56,7 @@ export class TaskState {
 
     @Action(GetTask)
     getTask(con: StateContext<TaskStateModel>, { payload }) {
-        return this.TaskService.fetchTask(payload).pipe(tap(returnData => {
+        return this.taskService.fetchTask(payload).pipe(tap(returnData => {
             const state = con.getState();
             con.setState({
                 ...state,
@@ -64,7 +67,7 @@ export class TaskState {
 
     @Action(GetTaskByProduct)
     getTaskByProduct(con: StateContext<TaskStateModel>, { payload }) {
-        return this.TaskService.fetchTaskByProduct(payload).pipe(tap(returnData => {
+        return this.taskService.fetchTaskByProduct(payload).pipe(tap(returnData => {
             const state = con.getState();
             con.setState({
                 ...state,
@@ -75,7 +78,7 @@ export class TaskState {
 
     @Action(GetTaskById)
     getTaskById(con: StateContext<TaskStateModel>, { payload }) {
-        return this.TaskService.fetchTaskById(payload).pipe(tap(returnData => {
+        return this.taskService.fetchTaskById(payload).pipe(tap(returnData => {
             const state = con.getState();
             con.setState({
                 ...state,
@@ -86,7 +89,7 @@ export class TaskState {
 
     @Action(GetTasks)
     getTasks(con: StateContext<TaskStateModel>) {
-        return this.TaskService.fetchTasks(this.getCookie()).pipe(tap(returnData => {
+        return this.taskService.fetchTasks(this.getCookie()).pipe(tap(returnData => {
             const state = con.getState();
             con.setState({
                 ...state,
@@ -97,10 +100,35 @@ export class TaskState {
 
     @Action(AddTask)
     addTask(con: StateContext<TaskStateModel>, { payload }: AddTask) {
-        return this.TaskService.addTask(this.getCookie(), payload).pipe(tap(returnData => {
+        return this.taskService.addTask(this.getCookie(), payload).pipe(tap(returnData => {
             const state = con.getState();
             con.patchState({
                 task: [...state.task, returnData]
+            })
+        }))
+    }
+
+    @Action(UpdateTask)
+    updateTask(con: StateContext<TaskStateModel>, { payload }: UpdateTask) {
+        return this.taskService.updateTask(payload).pipe(tap(returnData => {
+            const state = con.getState();
+            const taskList = [...state.taskById];
+            con.setState({
+                ...state,
+                taskById: taskList
+            })
+        }))
+    }
+
+    @Action(DeleteTask)
+    deleteTask(con: StateContext<TaskStateModel>, { id }: DeleteTask) {
+        return this.taskService.deleteTask(id).pipe(tap(() => {
+            const state = con.getState();
+            const filteredArray = state.tasksByProduct.filter((contents: { _id: string; }) => contents._id !== id)
+
+            con.setState({
+                ...state,
+                tasksByProduct: filteredArray
             })
         }))
     }

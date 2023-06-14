@@ -54,7 +54,7 @@
                   <a routerLink="/task-edit/{{task._id}}" class="dropdown-item">Edit</a>
                 </td>
                 <td>
-                  <a class="dropdown-item" href="javascript:void(0)">Delete</a>
+                  <a (click)="deleteTask(task._id)" class="dropdown-item">Delete</a>
                 </td>
               </tr>
 

@@ -13,6 +13,7 @@ import { ProductDetailComponent } from 'src/app/pages/product-detail/product-det
 import { TaskAddComponent } from 'src/app/pages/task-add/task-add.component';
 import { TaskListsComponent } from 'src/app/pages/task-lists/task-lists.component';
 import { TaskEditComponent } from 'src/app/pages/task-edit/task-edit.component';
+import { ProjectTaskEditComponent } from 'src/app/components/project-task-edit/project-task-edit.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { TaskEditComponent } from 'src/app/pages/task-edit/task-edit.component';
     ProductDetailComponent,
     TaskAddComponent,
     TaskListsComponent,
-    TaskListsComponent
+    TaskListsComponent,
+    ProjectTaskEditComponent
   ]
 })
 export class AuthLayoutModule { }

@@ -11,7 +11,7 @@ exports.createTask = async (req, res, next) => {
         priority,
         status
     } = req.body;
-    const userId = req.user._id
+    const userId = req.user.id
     try {
         const task = await Task.create({
             name,
@@ -113,41 +113,13 @@ exports.searchTask = async (req, res, next) => {
 // Update task image in Cloudinary and task data in MongoDB.
 exports.updateTask = async (req, res, next) => {
     try {
-        //current task
-        const currentTask = await Task.findById(req.params.id);
-        const form = req.body.form
-        //build the data object
-        const data = {
-            name: form.name,
-            description: form.description,
-            price: form.price,
-            image: form.image
-        }
-        //modify image conditionnally
-        if (req.body.image !== '') {
-            const ImgId = currenttask.image_id;
-            if (ImgId) {
-                await cloudinary.uploader.destroy(ImgId);
-            }
-
-            const newImage = await cloudinary.uploader.upload(req.body.image, {
-                folder: "tasks",
-                width: 1000,
-                crop: "scale"
-            });
-
-            data.image = newImage.secure_url;
-            data.image_id = newImage.public_id
-        }
-
-        const taskUpdate = await task.findOneAndUpdate(req.params.id, data, { new: true })
-
-        res.status(200).json({
-            success: true,
-            taskUpdate
-        })
-
-
+        const { name, description, priority, status } = req.body;
+        const task = await Task.findOneAndUpdate(
+            { _id: req.params.id },
+            { name, description, priority, status },
+            { new: true }
+        );
+        res.json(task);
     } catch (error) {
         console.log(error);
         next(error);
@@ -161,9 +133,9 @@ exports.updateTask = async (req, res, next) => {
 exports.deleteTask = async (req, res, next) => {
 
     try {
-        const task = await task.findById(req.params.id);
+        const task = await Task.findById(req.params.id);
         //retrieve current image ID
-        const rmTask = await task.findByIdAndDelete(req.params.id);
+        const rmTask = await Task.findByIdAndDelete(req.params.id);
 
         res.status(201).json({
             success: true,
