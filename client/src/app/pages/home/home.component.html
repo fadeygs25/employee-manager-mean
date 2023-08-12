@@ -1,0 +1,57 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+    style="min-height: 100px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+            <div class="col-lg-7 col-md-10">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <h2 class="mt-lg mb-5">
+                        <span>Project</span>
+                    </h2>
+
+                    <!-- Card stats -->
+                    <div class="row">
+                        <div *ngFor="let product of products;index as i" class="col-xl-3 col-lg-6">
+                            <div class="card card-stats mb-4 mb-xl-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h2 font-weight-bold mb-0">{{product.name}}</span>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">
+                                                ${{product.price}}
+                                            </h5>
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-warning"></i> {{product.status}}
+                                            </span>
+                                            <h5 class="card-title text-uppercase text-muted mb-0">
+                                                {{product.size}} Employees
+                                            </h5>
+                                        </div>
+
+                                    </div>
+                                    <div class="">
+                                        <a routerLink="/product-detail/{{product._id}}" class=" btn btn-info">View
+                                            Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

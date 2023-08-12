@@ -1,0 +1,110 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-lg-7 col-md-10">
+                    <a [routerLink]="['/product-add']" class="btn btn-info">Add Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">My account</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="userForm" (ngSubmit)="addUser()" role="form">
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-3"></i></span>
+                                </div>
+                                <input formControlName="username" class="form-control" placeholder="User name"
+                                    type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-3"></i></span>
+                                </div>
+                                <input formControlName="fullName" class="form-control" placeholder="Full name"
+                                    type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-83"></i></span>
+                                </div>
+                                <input formControlName="email" class="form-control" placeholder="Email" type="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-83"></i></span>
+                                </div>
+                                <input formControlName="number" class="form-control" placeholder="Number" type="number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-83"></i></span>
+                                </div>
+                                <input formControlName="address" class="form-control" placeholder="Address" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-open"></i></span>
+                                </div>
+                                <input formControlName="password" class="form-control" placeholder="Password"
+                                    type="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-open"></i></span>
+                                </div>
+                                <input formControlName="rpassword" class="form-control" placeholder="Repeat Password"
+                                    type="password">
+                            </div>
+                        </div>
+                        <div class="text-muted font-italic"><small>password strength: <span
+                                    class="text-success font-weight-700">strong</span></small></div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="custom-control custom-control-alternative custom-checkbox">
+                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                                    <label class="custom-control-label" for="customCheckRegister">
+                                        <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
