@@ -1,6 +1,6 @@
 import { environment } from "src/environments/environment";
 
-const BASE_URL = environment.production ? '' : 'https://employee-manager-server.onrender.com';
+const BASE_URL = environment.production ? '' : 'https://www.pichainmall.pro';
 
 export const FOODS_URL = BASE_URL + '/api/foods';
 export const FOODS_TAGS_URL = FOODS_URL + '/tags';
